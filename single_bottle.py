@@ -4,15 +4,18 @@ import bottle
 
 app = bottle.Bottle()
 
+
 @app.route('/static/<filename>')
 def server_static(filename):
     return bottle.static_file(filename, root='/path/to/your/static/files')
+
 
 @app.route('/')
 def index():
     return 'Index page'
 
-@app.get('/login') # or @route('/login')
+
+@app.get('/login')  # or @route('/login')
 def login():
     return '''
         <form action="/login" method="post">
@@ -22,11 +25,13 @@ def login():
         </form>
     '''
 
+
 def check_login(user, passwd):
     if user == 'user' and passwd == 'passwd':
         return True
 
-@app.post('/login') # or @route('/login', method='POST')
+
+@app.post('/login')  # or @route('/login', method='POST')
 def do_login():
     username = bottle.request.forms.get('username')
     password = bottle.request.forms.get('password')
@@ -35,8 +40,10 @@ def do_login():
     else:
         return "<p>Login failed.</p>"
 
+
 def server():
     bottle.run(app=app, host='0.0.0.0', port=8080)
+
 
 def processing_loop():
     t = 0
@@ -46,6 +53,7 @@ def processing_loop():
             print('Alive')
             t = 0
         t += 1
+
 
 if __name__ == '__main__':
     server_process = multiprocessing.Process(target=server)

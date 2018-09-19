@@ -8,15 +8,18 @@ class MainHandler(tornado.web.RequestHandler):
     def get(self):
         self.write('MainHandler')
 
+
 def make_app():
     return tornado.web.Application([
         (r'/', MainHandler),
     ])
 
+
 def server():
     app = make_app()
     app.listen(8888)
     tornado.ioloop.IOLoop.current().start()
+
 
 def processing_loop():
     t = 0
@@ -26,6 +29,7 @@ def processing_loop():
             print('Alive')
             t = 0
         t += 1
+
 
 if __name__ == '__main__':
     server_process = multiprocessing.Process(target=server)

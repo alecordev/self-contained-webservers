@@ -4,12 +4,15 @@ from flask import Flask, jsonify
 
 app = Flask(__name__)
 
+
 @app.route('/')
 def index():
     return 'Index page'
 
+
 def server():
     app.run(host='0.0.0.0', port=8080)
+
 
 def processing_loop():
     t = 0
@@ -19,6 +22,7 @@ def processing_loop():
             print('Alive')
             t = 0
         t += 1
+
 
 if __name__ == '__main__':
     server_process = multiprocessing.Process(target=server)
